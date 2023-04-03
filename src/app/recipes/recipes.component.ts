@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Recipe} from "./recipe.model";
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent {
-
+export class RecipesComponent{
+  isRecipeSelected = false;
+  @Input() selectedRecipe!: Recipe;
+  onClickRecipe(clickedRecipe: Recipe) {
+    this.isRecipeSelected = true;
+    this.selectedRecipe = clickedRecipe;
+  }
 }
