@@ -1,19 +1,10 @@
-<app-header/>
+<app-header (onSelectView)="onSelectView($event)"/>
 <div class="container" style="padding-top: 10px">
   <div class="row">
-    <div class="col-xs-12">
-      <app-recipes>
-
-      </app-recipes>
+    <div class="col-md-12">
+      <app-shopping-list *ngIf="currentView === CurrentView.SHOPPING_LIST"></app-shopping-list>
+      <app-recipes *ngIf="currentView === CurrentView.RECIPES"></app-recipes>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <app-shopping-list>
-      </app-shopping-list>
-    </div>
-  </div>
-
-
 </div>
 
