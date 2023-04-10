@@ -8,9 +8,10 @@
       <a class="nav-link" href="#" (click)="onRecipesClicked()">Recipes</a>
     </li>
   </ul>
-  <span>
+  <span style="margin-left: auto; margin-right: 1rem;">
     <app-dropdown dropdownStyle="light"
                   dropdownTitle="Manage"
+                  [alignToRight]="true"
                   [menuList]="['Save Data', 'Fetch Data']">
     </app-dropdown>
   </span>

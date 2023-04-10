@@ -9,14 +9,9 @@ export class DropdownComponent {
   @Input() menuList;
   @Input() dropdownStyle: string = 'default';
   @Input() dropdownTitle: string = 'Dropdown';
-
-  menuOpened = false;
+  @Input() alignToRight = false;
 
   constructor(private elRef: ElementRef) {}
-
-  @HostListener('document:click', ['$event']) toggleOpen(event: Event) {
-    this.menuOpened = this.elRef.nativeElement.contains(event.target) ? !this.menuOpened : false;
-  }
 
   
 }
