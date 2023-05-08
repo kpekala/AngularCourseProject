@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "./recipe.model";
-import { RecipesService } from './recipes.service';
+import { RecipesService } from './recipe.service';
 
 @Component({
   selector: 'app-recipes',
@@ -9,12 +9,17 @@ import { RecipesService } from './recipes.service';
   providers: [RecipesService]
 })
 export class RecipesComponent{
-  isRecipeSelected = false;
-  @Input() selectedRecipe!: Recipe;
+  selectedRecipe: Recipe;
 
-  
-  onClickRecipe(clickedRecipe: Recipe) {
-    this.isRecipeSelected = true;
-    this.selectedRecipe = clickedRecipe;
+  constructor(private recipeService: RecipesService){
+
+  }
+
+  ngOnInit(){
+    this.recipeService.recipeSelected.subscribe(
+      (recipe: Recipe) => {
+        this.selectedRecipe = recipe;
+      }
+    )
   }
 }
