@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, ElementRef} from '@angular/core';
+import {Component, Input, ElementRef, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -11,7 +11,13 @@ export class DropdownComponent {
   @Input() dropdownTitle: string = 'Dropdown';
   @Input() alignToRight = false;
 
+  @Output() onClickEvent = new EventEmitter<string>();
+
   constructor(private elRef: ElementRef) {}
 
-  
+  onClick(itemName: string){
+    this.onClickEvent.emit(itemName);
+  }
+
+
 }

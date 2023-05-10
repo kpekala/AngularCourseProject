@@ -1,14 +1,18 @@
 <div class="dropdown">
-  <button class="btn dropdown-toggle" 
-  [ngClass]="{'btn-primary': dropdownStyle === 'default', 
-                'btn-light': dropdownStyle === 'light'}" 
-  type="button" 
-  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="btn dropdown-toggle"
+          [ngClass]="{'btn-primary': dropdownStyle === 'default',
+                'btn-light': dropdownStyle === 'light'}"
+          type="button"
+          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     {{dropdownTitle}}
   </button>
-  <ul class="dropdown-menu" 
-  [ngClass] = "{'dropdown-menu-end': alignToRight}"
-  aria-labelledby="dropdownMenuButton1">
-    <li *ngFor="let item of menuList"><a class="dropdown-item" href="#">{{item}}</a></li>
-    </ul>
+  <ul class="dropdown-menu"
+      [ngClass]="{'dropdown-menu-end': alignToRight}"
+      aria-labelledby="dropdownMenuButton1">
+    <li *ngFor="let item of menuList">
+      <a class="dropdown-item" href="#" (click)="onClick(item);">
+        {{item}}
+      </a>
+    </li>
+  </ul>
 </div>

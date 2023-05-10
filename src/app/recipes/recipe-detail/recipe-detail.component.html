@@ -13,7 +13,9 @@
 <div class="row">
   <div class="col-xs-12">
     <app-dropdown
-    [menuList]="['To Shopping List', 'Edit Recipe', 'Delete Recipe']">
+    [menuList]="[TO_SHOPPING_LIST_LABEL, 'Edit Recipe', 'Delete Recipe']"
+    [dropdownTitle]="'Manage'"
+    (onClickEvent)="onDropdownItemClick($event)">
     </app-dropdown>
   </div>
 </div>
