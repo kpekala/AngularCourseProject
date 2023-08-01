@@ -7,14 +7,4 @@ import {ViewState} from "../shared/enums";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
-  @Output() onSelectView = new EventEmitter<ViewState>();
-
-  onShoppingListClicked() {
-    this.onSelectView.emit(ViewState.SHOPPING_LIST);
-  }
-
-  onRecipesClicked() {
-    this.onSelectView.emit(ViewState.RECIPES);
-  }
 }

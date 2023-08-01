@@ -8,13 +8,4 @@ import {ViewState} from "./shared/enums";
 })
 export class AppComponent {
   title = 'angular-course-project';
-  currentView: ViewState = ViewState.RECIPES;
-
-  public get CurrentView() {
-    return ViewState
-  }
-
-  onSelectView(newViewState: ViewState) {
-    this.currentView = newViewState;
-  }
 }

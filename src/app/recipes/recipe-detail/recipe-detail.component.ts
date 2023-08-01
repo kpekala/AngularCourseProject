@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Recipe} from "../recipe.model";
 import {ShoppingListService} from "../../shopping-list/shopping-list.service";
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -8,11 +9,15 @@ import {ShoppingListService} from "../../shopping-list/shopping-list.service";
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent {
-  @Input() recipe: Recipe;
-
   TO_SHOPPING_LIST_LABEL: string = 'To shopping list';
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  recipe: Recipe;
+
+  constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute) {
+    this.route.data.subscribe((data: Data) => {
+      this.recipe = data['recipe'];
+    })
+  }
 
 
   onDropdownItemClick(itemName: string){
