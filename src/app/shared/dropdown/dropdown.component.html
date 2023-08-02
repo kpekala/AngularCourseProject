@@ -10,8 +10,9 @@
       [ngClass]="{'dropdown-menu-end': alignToRight}"
       aria-labelledby="dropdownMenuButton1">
     <li *ngFor="let item of menuList">
-      <a style="cursor: pointer;" class="dropdown-item" (click)="onClick(item);">
-        {{item}}
+      <a style="cursor: pointer;" class="dropdown-item" (click)="onClick(item);"
+      [routerLink]="item.route">
+        {{item.label}}
       </a>
     </li>
   </ul>

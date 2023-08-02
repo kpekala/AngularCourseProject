@@ -10,7 +10,11 @@ import { ActivatedRoute, Data } from '@angular/router';
 })
 export class RecipeDetailComponent {
   TO_SHOPPING_LIST_LABEL: string = 'To shopping list';
-
+  menuList = [
+    {label: 'To shopping list', route: './'},
+    {label: 'Edit Recipe', route: './edit'},
+    {label: 'Delete Recipe', route: './'}
+  ];
   recipe: Recipe;
 
   constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute) {
