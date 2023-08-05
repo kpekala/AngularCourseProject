@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Recipe} from "../recipe.model";
 import {ShoppingListService} from "../../shopping-list/shopping-list.service";
-import { ActivatedRoute, Data } from '@angular/router';
+import {ActivatedRoute, Data, Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -9,15 +9,16 @@ import { ActivatedRoute, Data } from '@angular/router';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent {
-  TO_SHOPPING_LIST_LABEL: string = 'To shopping list';
-  menuList = [
-    {label: 'To shopping list', route: './'},
-    {label: 'Edit Recipe', route: './edit'},
-    {label: 'Delete Recipe', route: './'}
-  ];
+  TO_SHOPPING_LIST_LABEL = 'To shopping list';
+  EDIT_RECIPE_LABEL = 'Edit Recipe';
+
+  DELETE_RECIPE_LABEL = 'Delete Recipe';
+  menuLabels = [this.TO_SHOPPING_LIST_LABEL, this.EDIT_RECIPE_LABEL, this.DELETE_RECIPE_LABEL];
   recipe: Recipe;
 
-  constructor(private shoppingListService: ShoppingListService, private route: ActivatedRoute) {
+  constructor(private shoppingListService: ShoppingListService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.route.data.subscribe((data: Data) => {
       this.recipe = data['recipe'];
     })
@@ -27,6 +28,9 @@ export class RecipeDetailComponent {
   onDropdownItemClick(itemName: string){
     if (itemName === this.TO_SHOPPING_LIST_LABEL){
       this.shoppingListService.addNewIngredients(this.recipe.ingredients);
+    }
+    if(itemName === this.EDIT_RECIPE_LABEL){
+      this.router.navigate(['edit'], {relativeTo: this.route});
     }
   }
 }

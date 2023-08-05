@@ -12,11 +12,21 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <app-dropdown
-    [menuList]="menuList"
-    [dropdownTitle]="'Manage'"
-    (onClickEvent)="onDropdownItemClick($event)">
-    </app-dropdown>
+    <div class="dropdown">
+      <button class="btn dropdown-toggle btn-primary"
+              type="button"
+              id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Manage
+      </button>
+      <ul class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton1">
+        <li *ngFor="let label of menuLabels" (click)="onDropdownItemClick(label)">
+          <a style="cursor: pointer;" class="dropdown-item">
+            {{label}}
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 <div class="row">

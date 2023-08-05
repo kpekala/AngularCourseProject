@@ -10,7 +10,6 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { DropdownComponent } from './shared/dropdown/dropdown.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SelectRecipeComponent } from './recipes/select-recipe/select-recipe.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
@@ -26,12 +25,11 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     RecipeItemComponent,
     RecipeDetailComponent,
     RecipesComponent,
-    DropdownComponent,
     SelectRecipeComponent,
     RecipeEditComponent
     ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     AppRoutingModule
   ],
   providers: [],
