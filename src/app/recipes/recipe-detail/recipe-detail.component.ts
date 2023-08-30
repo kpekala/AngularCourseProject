@@ -11,8 +11,8 @@ import {ActivatedRoute, Data, Router} from '@angular/router';
 export class RecipeDetailComponent {
   TO_SHOPPING_LIST_LABEL = 'To shopping list';
   EDIT_RECIPE_LABEL = 'Edit Recipe';
-
   DELETE_RECIPE_LABEL = 'Delete Recipe';
+  
   menuLabels = [this.TO_SHOPPING_LIST_LABEL, this.EDIT_RECIPE_LABEL, this.DELETE_RECIPE_LABEL];
   recipe: Recipe;
 
