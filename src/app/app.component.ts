@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ViewState} from "./shared/enums";
+import {RecipesService} from "./recipes/recipe.service";
 
 @Component({
   selector: 'app-root',

@@ -8,6 +8,7 @@ export const recipeResolver: ResolveFn<any>
     const recipesService = inject(RecipesService);
 
     const id: number = +route.params['id'];
+  console.log(recipesService.getRecipe(id));
 
     return recipesService.getRecipe(id);
  }

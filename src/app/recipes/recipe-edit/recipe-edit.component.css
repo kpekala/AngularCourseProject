@@ -1,8 +1,12 @@
-.btn-danger{
+.btn-danger, .btn-secondary{
     margin-left: 1rem;
 }
 
 input.ng-invalid.ng-touched,
 textarea.invalid.ng-touched{
   border-color: red;
+}
+
+img{
+  max-width: 100%;
 }
