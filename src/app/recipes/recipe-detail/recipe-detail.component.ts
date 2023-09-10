@@ -35,11 +35,16 @@ export class RecipeDetailComponent implements OnInit{
   }
 
   onDropdownItemClick(itemName: string){
-    if (itemName === this.TO_SHOPPING_LIST_LABEL){
-      this.shoppingListService.addNewIngredients(this.recipe.ingredients);
-    }
-    if(itemName === this.EDIT_RECIPE_LABEL){
-      this.router.navigate(['edit'], {relativeTo: this.route});
+    switch(itemName) {
+      case this.TO_SHOPPING_LIST_LABEL:
+        this.shoppingListService.addNewIngredients(this.recipe.ingredients);
+        break;
+      case this.EDIT_RECIPE_LABEL:
+        this.router.navigate(['edit'], {relativeTo: this.route});
+        break;
+      case this.DELETE_RECIPE_LABEL:
+        this.recipesService.deleteRecipe(this.id);
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
   }
 }
