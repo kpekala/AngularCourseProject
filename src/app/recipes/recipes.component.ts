@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Recipe} from "./recipe.model";
-import { RecipesService } from './recipe.service';
+import { RecipesService } from './recipes.service';
 
 @Component({
   selector: 'app-recipes',
@@ -8,4 +8,5 @@ import { RecipesService } from './recipe.service';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent{
+
 }

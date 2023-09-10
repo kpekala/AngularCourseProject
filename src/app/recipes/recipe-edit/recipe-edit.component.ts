@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {RecipesService} from '../recipe.service';
+import {RecipesService} from '../recipes.service';
 import {Recipe} from "../recipe.model";
 
 @Component({
@@ -61,7 +61,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.recipeForm.value);
     if (this.editMode) {
       this.recipesService.updateRecipe(this.id, this.recipeForm.value);
     }else {

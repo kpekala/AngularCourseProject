@@ -19,11 +19,8 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-end"
           aria-labelledby="dropdownMenuButton1">
-        <li *ngFor="let label of ['Save Data', 'Fetch Data']">
-          <a style="cursor: pointer;" class="dropdown-item">
-            {{label}}
-          </a>
-        </li>
+          <a style="cursor: pointer;" class="dropdown-item" (click)="onSaveDataClick()">Save data</a>
+          <a style="cursor: pointer;" class="dropdown-item" (click)="onFetchDataClick()">Fetch data</a>
       </ul>
     </div>
   </span>
