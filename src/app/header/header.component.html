@@ -5,17 +5,20 @@
       <a class="nav-link" routerLinkActive="active"
         routerLink="shopping-list">Shopping list</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isAuthenticated">
       <a class="nav-link" routerLinkActive="active"
         routerLink="recipes">Recipes</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="!isAuthenticated">
       <a class="nav-link" routerLinkActive="active"
         routerLink="auth">Authenticate</a>
     </li>
   </ul>
-  <span style="margin-left: auto; margin-right: 1rem;">
-    <div class="dropdown">
+  <ul class="nav navbar-nav navbar-right ms-auto me-2">
+    <li class="nav-item" style="margin: auto;" *ngIf="isAuthenticated">
+      <a style="cursor: pointer;">Logout</a>
+    </li>
+    <li class="dropdown">
       <button class="btn dropdown-toggle btn-light"
               type="button"
               id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,6 +29,6 @@
           <a style="cursor: pointer;" class="dropdown-item" (click)="onSaveDataClick()">Save data</a>
           <a style="cursor: pointer;" class="dropdown-item" (click)="onFetchDataClick()">Fetch data</a>
       </ul>
-    </div>
-  </span>
+    </li>
+  </ul>
 </nav>
