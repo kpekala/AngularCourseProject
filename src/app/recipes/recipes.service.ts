@@ -1,8 +1,9 @@
 import {EventEmitter, Injectable} from "@angular/core";
 import {Recipe} from "./recipe.model";
 import {Ingredient} from "../shared/ingredient.model";
-import {Subject, map, tap} from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import {Subject, exhaustMap, map, take, tap} from "rxjs";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
@@ -14,7 +15,7 @@ export class RecipesService {
   private localRecipes: Recipe[] = [];
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   getRecipes() {
@@ -52,14 +53,18 @@ export class RecipesService {
   }
 
   fetchRecipes(){
-    return this.http.get<Recipe[]>(this.recipesUrl)
-      .pipe(map(recipes => {
+    return this.authService.user.pipe(
+      take(1), 
+      exhaustMap(user => {
+        const params = new HttpParams().set('auth', user.token);
+        return this.http.get<Recipe[]>(this.recipesUrl, {params: params})
+    }),map(recipes => {
         return recipes.map(recipe => {
           return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
         })
-      }), tap((recipes) => {
-        this.localRecipes = recipes;
-        this.updateListeners();
-      }));
+    }),tap((recipes) => {
+      this.localRecipes = recipes;
+      this.updateListeners();
+    }));
   }
 }
