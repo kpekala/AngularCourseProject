@@ -53,12 +53,9 @@ export class RecipesService {
   }
 
   fetchRecipes(){
-    return this.authService.user.pipe(
-      take(1), 
-      exhaustMap(user => {
-        const params = new HttpParams().set('auth', user.token);
-        return this.http.get<Recipe[]>(this.recipesUrl, {params: params})
-    }),map(recipes => {
+    return this.http.get<Recipe[]>(this.recipesUrl)
+    .pipe(
+      map(recipes => {
         return recipes.map(recipe => {
           return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
         })
