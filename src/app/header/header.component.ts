@@ -27,6 +27,10 @@ export class HeaderComponent implements OnDestroy, OnInit{
     this.fetchRecipesSub = this.recipesService.fetchRecipes().subscribe();
   }
 
+  onLogout() {
+    this.authService.logout();
+  }
+
   ngOnDestroy(): void {
     this.fetchRecipesSub.unsubscribe();
     this.userSub.unsubscribe();
