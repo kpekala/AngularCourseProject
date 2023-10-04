@@ -1,11 +1,10 @@
-import {EventEmitter, Injectable} from "@angular/core";
 import {Recipe} from "./recipe.model";
-import {Ingredient} from "../shared/ingredient.model";
-import {Subject, exhaustMap, map, take, tap} from "rxjs";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {Subject, map, tap} from "rxjs";
+import { HttpClient } from "@angular/common/http";
 import { AuthService } from "../auth/auth.service";
+import { Injectable } from "@angular/core";
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class RecipesService {
 
   recipesChanged = new Subject<Recipe[]>();
