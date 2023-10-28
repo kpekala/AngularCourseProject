@@ -4,7 +4,6 @@ import com.kpekala.recipes.auth.AuthService;
 import com.kpekala.recipes.auth.rest.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +18,7 @@ public class AuthController {
 
     @PostMapping("api/signup")
     public ResponseEntity<Object> signUp(@RequestBody UserDto user){
+        authService.signUp(user.email(), user.password());
         return ResponseEntity.accepted().body(true);
     }
 }
