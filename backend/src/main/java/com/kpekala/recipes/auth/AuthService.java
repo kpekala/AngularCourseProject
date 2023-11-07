@@ -1,6 +1,8 @@
 package com.kpekala.recipes.auth;
 
+import com.kpekala.recipes.auth.rest.SignUpResponse;
+
 public interface AuthService {
 
-    void signUp(String email, String password);
+    SignUpResponse signUp(String email, String password);
 }

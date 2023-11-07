@@ -1,7 +1,6 @@
 package com.kpekala.recipes.auth.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kpekala.recipes.auth.rest.dto.UserDto;
 import com.kpekala.recipes.auth.user.UserEntity;
 import com.kpekala.recipes.auth.user.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,7 @@ public class AuthControllerTest {
     @Test
     public void testSignUp_createsNewUser() throws Exception {
 
-        UserDto userDto = new UserDto("test@test.pl", "test123");
+        SignUpRequest userDto = new SignUpRequest("test@test.pl", "test123");
 
         String userAsString = new ObjectMapper().writeValueAsString(userDto);
 
