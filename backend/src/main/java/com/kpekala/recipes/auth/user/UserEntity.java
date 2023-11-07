@@ -3,7 +3,6 @@ package com.kpekala.recipes.auth.user;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Table(name = "users")
 @Entity
 @Data
 public class UserEntity {

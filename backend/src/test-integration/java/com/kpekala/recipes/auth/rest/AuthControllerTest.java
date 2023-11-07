@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
@@ -28,17 +29,38 @@ public class AuthControllerTest {
 
     @Test
     public void testSignUp_createsNewUser() throws Exception {
+        // Assume
+        SignUpRequest request = new SignUpRequest("test@test.pl", "test123");
 
-        SignUpRequest userDto = new SignUpRequest("test@test.pl", "test123");
+        String userAsString = new ObjectMapper().writeValueAsString(request);
 
-        String userAsString = new ObjectMapper().writeValueAsString(userDto);
+        // Act
+        ResultActions resultActions = this.mockMvc.perform(post("/api/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(userAsString));
 
-        this.mockMvc.perform(post("/api/signup")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(userAsString))
-                .andExpect(status().is2xxSuccessful());
+        // Assert
+        resultActions.andExpect(status().is2xxSuccessful());
 
-        List<UserEntity> users = userRepository.findByEmail(userDto.email());
+        List<UserEntity> users = userRepository.findByEmail(request.email());
         assertThat(users).hasSize(1);
+    }
+
+    @Test
+    public void testSignUp_whenUserIsAlreadyCreated_returns5xx() throws Exception {
+        // Assume
+        SignUpRequest request = new SignUpRequest("test@test.pl", "test123");
+        UserEntity user = new UserEntity("test@test.pl", "test123");
+        String userAsString = new ObjectMapper().writeValueAsString(request);
+
+        // Act
+        userRepository.save(user);
+
+        ResultActions resultActions = this.mockMvc.perform(post("/api/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(userAsString));
+
+        // Assert
+        resultActions.andExpect(status().is5xxServerError());
     }
 }

@@ -24,7 +24,7 @@ public class AuthServiceImpl implements AuthService{
     public SignUpResponse signUp(String email, String password) {
         List<UserEntity> usersWithSameEmail = userRepository.findByEmail(email);
         if (!usersWithSameEmail.isEmpty())
-            throw new UserExistsException("User with this email exists!");
+            throw new UserExistsException();
         userRepository.save(new UserEntity(email, password));
 
         Date expirationDate = Date.from(Instant.now().plusSeconds(3600L));
