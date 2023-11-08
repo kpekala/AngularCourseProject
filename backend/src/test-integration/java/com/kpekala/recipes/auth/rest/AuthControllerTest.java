@@ -3,6 +3,7 @@ package com.kpekala.recipes.auth.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kpekala.recipes.auth.user.UserEntity;
 import com.kpekala.recipes.auth.user.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,6 +28,11 @@ public class AuthControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @BeforeEach
+    public void beforeEach() {
+        userRepository.deleteAll();
+    }
+
     @Test
     public void testSignUp_createsNewUser() throws Exception {
         // Assume
@@ -47,7 +53,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void testSignUp_whenUserIsAlreadyCreated_returns5xx() throws Exception {
+    public void testSignUp_whenUserIsAlreadyCreated_returns4xx() throws Exception {
         // Assume
         SignUpRequest request = new SignUpRequest("test@test.pl", "test123");
         UserEntity user = new UserEntity("test@test.pl", "test123");
@@ -61,6 +67,6 @@ public class AuthControllerTest {
                         .content(userAsString));
 
         // Assert
-        resultActions.andExpect(status().is5xxServerError());
+        resultActions.andExpect(status().is4xxClientError());
     }
 }
