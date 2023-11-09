@@ -57,14 +57,53 @@ public class AuthControllerTest {
         // Assume
         SignUpRequest request = new SignUpRequest("test@test.pl", "test123");
         UserEntity user = new UserEntity("test@test.pl", "test123");
-        String userAsString = new ObjectMapper().writeValueAsString(request);
+        String stringRequest = new ObjectMapper().writeValueAsString(request);
 
         // Act
         userRepository.save(user);
 
         ResultActions resultActions = this.mockMvc.perform(post("/api/signup")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(userAsString));
+                        .content(stringRequest));
+
+        // Assert
+        resultActions.andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void testLogin_whenUserExists_loginSuccessfully() throws Exception {
+        // Assume
+        String userEmail = "test@test.pl";
+        String userPassword = "test123";
+        UserEntity user = new UserEntity(userEmail, userPassword);
+
+        // Act
+        userRepository.save(user);
+
+        LoginRequest request = new LoginRequest(userEmail, userPassword);
+        String stringRequest = new ObjectMapper().writeValueAsString(request);
+
+        ResultActions resultActions = this.mockMvc.perform(post("/api/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(stringRequest));
+
+        // Assert
+        resultActions.andExpect(status().isOk());
+    }
+
+    @Test
+    public void testLogin_whenUserDoesNotExist_return4xx() throws Exception {
+        // Assume
+        String userEmail = "test@test.pl";
+        String userPassword = "test123";
+
+        // Act
+        LoginRequest request = new LoginRequest(userEmail, userPassword);
+        String stringRequest = new ObjectMapper().writeValueAsString(request);
+
+        ResultActions resultActions = this.mockMvc.perform(post("/api/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(stringRequest));
 
         // Assert
         resultActions.andExpect(status().is4xxClientError());

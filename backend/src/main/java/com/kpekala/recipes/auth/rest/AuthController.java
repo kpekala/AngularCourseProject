@@ -1,6 +1,7 @@
 package com.kpekala.recipes.auth.rest;
 
 import com.kpekala.recipes.auth.AuthService;
+import com.kpekala.recipes.auth.exception.UserDoesNotExistException;
 import com.kpekala.recipes.auth.exception.UserExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,12 @@ public class AuthController {
         return authService.signUp(request.email(), request.password());
     }
 
-    @ExceptionHandler({UserExistsException.class})
+    @PostMapping("api/login")
+    public LoginResponse login(@RequestBody LoginRequest request){
+        return authService.login(request.email(), request.password());
+    }
+
+    @ExceptionHandler({UserExistsException.class, UserDoesNotExistException.class})
     public ResponseEntity<?> handleException(){
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
