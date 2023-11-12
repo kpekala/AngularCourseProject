@@ -2,6 +2,7 @@ package com.kpekala.recipes.auth;
 
 import com.kpekala.recipes.auth.exception.UserDoesNotExistException;
 import com.kpekala.recipes.auth.exception.UserExistsException;
+import com.kpekala.recipes.auth.exception.WrongPasswordException;
 import com.kpekala.recipes.auth.rest.LoginResponse;
 import com.kpekala.recipes.auth.rest.SignUpResponse;
 import com.kpekala.recipes.auth.user.UserEntity;
@@ -40,6 +41,9 @@ public class AuthServiceImpl implements AuthService{
         List<UserEntity> usersWithTheSameEmail = userRepository.findByEmail(email);
         if (usersWithTheSameEmail.isEmpty())
             throw new UserDoesNotExistException();
+        UserEntity userEntity = usersWithTheSameEmail.get(0);
+        if(!userEntity.getPassword().equals(password))
+            throw new WrongPasswordException();
 
         Date tokenExpirationDate = Date.from(Instant.now().plusSeconds(3600L));
         String token = JwtGenerator.generateJwt(tokenExpirationDate, email);
