@@ -108,4 +108,25 @@ public class AuthControllerTest {
         // Assert
         resultActions.andExpect(status().is4xxClientError());
     }
+
+    @Test
+    public void testLogin_whenWrongPassword_return4xx() throws Exception {
+        // Assume
+        String userEmail = "test@test.pl";
+        String userPassword = "test123";
+
+        // Act
+        UserEntity user = new UserEntity(userEmail, userPassword);
+        userRepository.save(user);
+
+        LoginRequest request = new LoginRequest(userEmail, "test1234");
+        String stringRequest = new ObjectMapper().writeValueAsString(request);
+
+        ResultActions resultActions = this.mockMvc.perform(post("/api/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(stringRequest));
+
+        // Assert
+        resultActions.andExpect(status().is4xxClientError());
+    }
 }
