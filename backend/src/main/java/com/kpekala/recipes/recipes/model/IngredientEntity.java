@@ -1,13 +1,13 @@
 package com.kpekala.recipes.recipes.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "INGREDIENTS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,6 +15,7 @@ import lombok.Setter;
 public class IngredientEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

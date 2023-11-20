@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Table(name = "RECIPES")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -16,7 +17,7 @@ import java.util.List;
 public class RecipeEntity {
 
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imageUrl;
