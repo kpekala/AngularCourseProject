@@ -1,4 +1,4 @@
-package com.kpekala.recipes.recipes.model;
+package com.kpekala.recipes.ingredient;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,26 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
-@Table(name = "RECIPES")
-@NoArgsConstructor
+@Table(name = "INGREDIENTS")
 @AllArgsConstructor
-@Setter
+@NoArgsConstructor
 @Getter
-public class RecipeEntity {
+@Setter
+public class IngredientEntity {
 
-    @Id()
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String imageUrl;
-
     private String name;
+    private int amount;
 
-    private String description;
-
-    @OneToMany
-    private List<IngredientEntity> ingredients;
+    public IngredientEntity(String name, int amount) {
+        this.name = name;
+        this.amount = amount;
+    }
 }
