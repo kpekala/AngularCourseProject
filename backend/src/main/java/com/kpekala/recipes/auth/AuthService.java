@@ -7,4 +7,6 @@ public interface AuthService {
 
     SignUpResponse signUp(String email, String password);
     LoginResponse login(String email, String password);
+
+    void validateToken(String token);
 }

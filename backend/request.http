@@ -1,4 +1,4 @@
-# login with admin account
+### login with admin account
 POST http://localhost:8080/api/login
 Content-Type: application/json
 
@@ -6,3 +6,8 @@ Content-Type: application/json
   "email": "admin",
   "password": "admin"
 }
+
+
+### fetch recipes
+
+GET http://localhost:8080/api/recipes?auth=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwMDg0MTA0NX0.iyruVD0112iIm0iaGwMwMpeJZrfK4D4LDTNzfG3fs50
