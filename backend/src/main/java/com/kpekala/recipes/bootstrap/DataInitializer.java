@@ -2,8 +2,8 @@ package com.kpekala.recipes.bootstrap;
 
 import com.kpekala.recipes.ingredient.IngredientEntity;
 import com.kpekala.recipes.ingredient.IngredientRepository;
-import com.kpekala.recipes.recipe.model.RecipeEntity;
-import com.kpekala.recipes.recipe.model.RecipeRepository;
+import com.kpekala.recipes.recipe.RecipeEntity;
+import com.kpekala.recipes.recipe.RecipeRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.kpekala.recipes.recipe.model;
+package com.kpekala.recipes.recipe;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

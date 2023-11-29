@@ -1,4 +1,4 @@
-package com.kpekala.recipes.recipe.model;
+package com.kpekala.recipes.recipe;
 
 import com.kpekala.recipes.ingredient.IngredientEntity;
 import jakarta.persistence.*;

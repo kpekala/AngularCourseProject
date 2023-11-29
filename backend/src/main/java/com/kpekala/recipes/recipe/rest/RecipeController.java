@@ -1,6 +1,8 @@
-package com.kpekala.recipes.recipe.model;
+package com.kpekala.recipes.recipe.rest;
 
 import com.kpekala.recipes.auth.AuthService;
+import com.kpekala.recipes.recipe.RecipeEntity;
+import com.kpekala.recipes.recipe.RecipeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
