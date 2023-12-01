@@ -10,4 +10,23 @@ Content-Type: application/json
 
 ### fetch recipes
 
-GET http://localhost:8080/api/recipes?auth=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwMDg0MTA0NX0.iyruVD0112iIm0iaGwMwMpeJZrfK4D4LDTNzfG3fs50
+GET http://localhost:8080/api/recipes?auth=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwMTQ3Mzk0Mn0.Vbtz-KY7kTyATcGV9egFndo4GI3jqLzNZkur8s8k9t4
+
+### set recipes
+
+PUT http://localhost:8080/api/recipes?auth=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwMTQ3Mzk0Mn0.Vbtz-KY7kTyATcGV9egFndo4GI3jqLzNZkur8s8k9t4
+Content-Type: application/json
+
+[
+  {
+    "name": "kebab",
+    "description": "tasty kebab",
+    "imageUrl": "",
+    "ingredients": [
+      {
+        "amount": "5",
+        "name": "beef"
+      }
+    ]
+  }
+]

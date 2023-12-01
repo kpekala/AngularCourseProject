@@ -33,6 +33,7 @@ public class RecipeController {
 
         List<RecipeEntity> recipeEntities = RecipeMapper.toRecipeEntities(recipeDtos);
 
+        recipeRepository.deleteAll();
         recipeRepository.saveAll(recipeEntities);
     }
 }

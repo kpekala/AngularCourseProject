@@ -60,8 +60,6 @@ public class RecipeControllerTest {
     @Test
     @Transactional
     public void testSetRecipes() throws Exception {
-        recipeRepository.deleteAll();
-
         var ingredientDtos = List.of(
                 new IngredientDto("Beer", 6)
         );
