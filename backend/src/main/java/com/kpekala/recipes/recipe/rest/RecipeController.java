@@ -2,12 +2,10 @@ package com.kpekala.recipes.recipe.rest;
 
 import com.kpekala.recipes.auth.AuthService;
 import com.kpekala.recipes.recipe.RecipeEntity;
+import com.kpekala.recipes.recipe.RecipeMapper;
 import com.kpekala.recipes.recipe.RecipeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +19,20 @@ public class RecipeController {
     private final RecipeRepository recipeRepository;
 
     @GetMapping()
-    public List<RecipeEntity> getRecipes(@RequestParam String auth) {
+    public List<RecipeDto> getRecipes(@RequestParam String auth) {
         authService.validateToken(auth);
 
-        return recipeRepository.findAll();
+        List<RecipeEntity> recipeEntities = recipeRepository.findAll();
+
+        return RecipeMapper.toRecipes(recipeEntities);
+    }
+
+    @PutMapping()
+    public void setRecipes(@RequestParam String auth, @RequestBody List<RecipeDto> recipeDtos) {
+        authService.validateToken(auth);
+
+        List<RecipeEntity> recipeEntities = RecipeMapper.toRecipeEntities(recipeDtos);
+
+        recipeRepository.saveAll(recipeEntities);
     }
 }

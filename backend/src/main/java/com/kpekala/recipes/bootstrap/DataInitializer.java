@@ -27,8 +27,6 @@ public class DataInitializer {
                 new IngredientEntity("Salt", 12)
         );
 
-        ingredientRepository.saveAll(ingredients);
-
         var recipes = List.of(
           new RecipeEntity("", "Sandwitch", "Super tasty sandwitch", List.of(ingredients.get(0), ingredients.get(1))),
           new RecipeEntity("", "Smalec", "Super tasty smalec", List.of(ingredients.get(2), ingredients.get(3)))
@@ -36,5 +34,4 @@ public class DataInitializer {
 
         recipeRepository.saveAll(recipes);
     }
-
 }

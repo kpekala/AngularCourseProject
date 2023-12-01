@@ -2,10 +2,7 @@ package com.kpekala.recipes.recipe;
 
 import com.kpekala.recipes.ingredient.IngredientEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 @Getter
+@ToString
 public class RecipeEntity {
 
     @Id()
@@ -27,7 +25,7 @@ public class RecipeEntity {
 
     private String description;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<IngredientEntity> ingredients;
 
     public RecipeEntity(String imageUrl, String name, String description, List<IngredientEntity> ingredients) {
@@ -36,4 +34,5 @@ public class RecipeEntity {
         this.description = description;
         this.ingredients = ingredients;
     }
+
 }
