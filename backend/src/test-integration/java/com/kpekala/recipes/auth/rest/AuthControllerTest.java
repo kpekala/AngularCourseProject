@@ -3,7 +3,6 @@ package com.kpekala.recipes.auth.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kpekala.recipes.auth.user.UserEntity;
 import com.kpekala.recipes.auth.user.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,11 +26,6 @@ public class AuthControllerTest {
 
     @Autowired
     private UserRepository userRepository;
-
-    @BeforeEach
-    public void beforeEach() {
-        userRepository.deleteAll();
-    }
 
     @Test
     public void testSignUp_createsNewUser() throws Exception {

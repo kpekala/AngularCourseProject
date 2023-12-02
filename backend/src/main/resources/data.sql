@@ -6,4 +6,4 @@
 -- insert into INGREDIENTS (name, amount) values ('Plum', 52);
 -- insert into INGREDIENTS (name, amount) values ('Pear', 23);
 
-insert into USERS (email, password) values ('admin', 'admin')
+insert into USERS (email, password) values ('admin@admin.pl', 'admin')

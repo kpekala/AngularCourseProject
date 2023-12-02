@@ -2,17 +2,18 @@ package com.kpekala.recipes.recipe.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kpekala.recipes.IntegrationTest;
 import com.kpekala.recipes.auth.AuthService;
 import com.kpekala.recipes.ingredient.IngredientDto;
 import com.kpekala.recipes.recipe.RecipeEntity;
 import com.kpekala.recipes.recipe.RecipeRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class RecipeControllerTest {
+public class RecipeControllerTest extends IntegrationTest {
 
 
     @Autowired
@@ -40,7 +41,7 @@ public class RecipeControllerTest {
 
     @BeforeEach
     public void setup() {
-        var response = authService.login("admin", "admin");
+        var response = authService.login("admin@admin.pl", "admin");
         adminToken = response.token();
     }
 
@@ -54,7 +55,7 @@ public class RecipeControllerTest {
         String content = result.getResponse().getContentAsString();
 
         List<RecipeEntity> recipes = new ObjectMapper().readValue(content, new TypeReference<>() {});
-        assertThat(recipes).hasSize(2);
+        assertThat(recipes).hasSize(3);
     }
 
     @Test
@@ -79,6 +80,5 @@ public class RecipeControllerTest {
         var recipe = recipes.get(0);
         assertThat(recipe).matches(r -> r.getName().equals("pizza"));
         System.out.println(recipes.get(0));
-
     }
 }

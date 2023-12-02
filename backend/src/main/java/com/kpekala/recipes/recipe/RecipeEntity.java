@@ -25,7 +25,7 @@ public class RecipeEntity {
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<IngredientEntity> ingredients;
 
     public RecipeEntity(String imageUrl, String name, String description, List<IngredientEntity> ingredients) {
