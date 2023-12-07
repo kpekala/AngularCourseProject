@@ -9,7 +9,7 @@ export class RecipesService {
 
   recipesChanged = new Subject<Recipe[]>();
 
-  recipesUrl = 'https://recipes-app-25ea1-default-rtdb.europe-west1.firebasedatabase.app/recipes.json';
+  recipesUrl = 'http://localhost:8080/api/recipes';
 
   private localRecipes: Recipe[] = [];
 
