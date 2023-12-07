@@ -31,6 +31,8 @@ public class AuthServiceImpl implements AuthService {
     @Value("${token-key}")
     private String tokenKey;
 
+    private final long tokenValidityDuration = 3600L;
+
     @Override
     @Transactional
     public SignUpResponse signUp(String email, String password) {
@@ -39,9 +41,9 @@ public class AuthServiceImpl implements AuthService {
             throw new UserExistsException();
         userRepository.save(new UserEntity(email, password));
 
-        Date tokenExpirationDate = Date.from(Instant.now().plusSeconds(3600L));
+        Date tokenExpirationDate = Date.from(Instant.now().plusSeconds(tokenValidityDuration));
         String token = generateJwt(tokenExpirationDate, email);
-        return new SignUpResponse(token, tokenExpirationDate.toString());
+        return new SignUpResponse(token, tokenValidityDuration);
     }
 
     @Override
@@ -54,10 +56,10 @@ public class AuthServiceImpl implements AuthService {
         if (!userEntity.getPassword().equals(password))
             throw new WrongPasswordException();
 
-        Date tokenExpirationDate = Date.from(Instant.now().plusSeconds(3600L));
+        Date tokenExpirationDate = Date.from(Instant.now().plusSeconds(tokenValidityDuration));
         String token = generateJwt(tokenExpirationDate, email);
 
-        return new LoginResponse(token, tokenExpirationDate.toString());
+        return new LoginResponse(token, tokenValidityDuration);
     }
 
     @Override

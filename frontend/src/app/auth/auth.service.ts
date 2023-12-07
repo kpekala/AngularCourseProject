@@ -6,13 +6,8 @@ import { Router } from "@angular/router";
 import {environment} from '../../environments/environment';
 
 export interface AuthResponseData {
-    kind: string,
-    idToken: string,
-    email: string,
-    refreshToken: string,
-    expiresIn: string,
-    localId: string,
-    registered?: boolean
+    token: string,
+    expiresIn: number
 }
 
 @Injectable({
@@ -30,31 +25,29 @@ export class AuthService {
     signup(email: string, password: string) {
         return this.http
             .post<AuthResponseData>(
-                'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaaseAPIKey,
-                {email: email, password: password, returnSecureToken: true}
+                'http://localhost:8080/api/signup', {email: email, password: password}
             ).pipe(
                 catchError(this.handleError), 
                 tap((resData: AuthResponseData) => {
-                    this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+                    this.handleAuthentication(email, resData.token, resData.expiresIn);
             }));
     }
 
     login(email: string, password: string) {
         return this.http
             .post<AuthResponseData>(
-                'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaaseAPIKey,
-                {email: email, password: password, returnSecureToken: true}
+                'http://localhost:8080/api/login',
+                {email: email, password: password}
             ).pipe(
                 catchError(this.handleError),
                 tap((resData: AuthResponseData) => {
-                    this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+                    this.handleAuthentication(email, resData.token, resData.expiresIn);
             }));
     }
 
     autoLogin() {
         type UserData = {
             email: string;
-            id: string;
             _token: string;
             _tokenExpirationDate: string;
         };
@@ -65,7 +58,6 @@ export class AuthService {
         
         const loadedUser = new User(
             userData.email, 
-            userData.id, 
             userData._token, 
             new Date(userData._tokenExpirationDate)
         );
@@ -92,9 +84,9 @@ export class AuthService {
         }, expirationDuration);
     }
 
-    private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    private handleAuthentication(email: string, token: string, expiresIn: number) {
         const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
-        const user = new User(email, userId, token, expirationDate);
+        const user = new User(email, token, expirationDate);
         this.user.next(user);
         this.autoLogout(expiresIn * 1000)
         localStorage.setItem('userData', JSON.stringify(user));
